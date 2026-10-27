@@ -1,0 +1,14 @@
+{
+  "name": "egg-timer",
+  "version": "1.0.0",
+  "description": "Cute Desktop Productivity / Focus Timer",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Egg Timer <3",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.3.3"
+  }
+}

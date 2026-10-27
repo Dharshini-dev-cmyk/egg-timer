@@ -1,0 +1,24 @@
+{
+  "name": "Egg Timer <3 — Focus Timer",
+  "short_name": "Egg Timer",
+  "description": "A cozy focus timer with themes, stats and a teddy companion. Works as a web dashboard and installs as a mobile app.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#170a38",
+  "theme_color": "#170a38",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/image/teddy.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+  <meta name="description" content="Egg Timer — a cozy focus timer with themes, stats and a teddy companion. Works as a web dashboard and installs as a mobile app.">
+  <meta name="theme-color" content="#170a38">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Egg Timer">
+  <title>Egg Timer <3</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="assets/image/teddy.png">
+  <link rel="apple-touch-icon" href="assets/image/teddy.png">
+</head>
+<body class="theme-sunset">
+
+  <div class="app">
+
+        <!-- Animated background -->
+    <div id="stars" class="stars"></div>
+    <div id="starGlow" class="star-glow"></div>
+    <div id="clouds" class="clouds"></div>
+    <div id="floatingHearts" class="floating-hearts"></div>
+    <div id="fireflies" class="fireflies"></div>
+    <div id="embers" class="embers"></div>
+
+    <!-- Ground shadow + tree silhouettes so the background is never empty -->
+    <div class="ground-shadow"></div>
+    <div id="trees" class="tree-silhouette"></div>
+
+    <!-- Theme decorations -->
+    <div id="moon" class="moon-decoration"></div>
+    <div id="sun" class="sun-decoration"></div>
+    <div id="birds" class="birds-decoration"></div>
+
+    <!-- Ocean waves container (populated on Ocean theme selection) -->
+    <div id="oceanWaves" class="waves"></div>
+
+    <!-- Greeting mascot (desk plushie companion) -->
+    <div id="greetingMascot" class="greeting-mascot">
+      <img
+        id="greetingMascotImg"
+        src="assets/image/teddy.png"
+        alt="Teddy desk plushie"
+      >
+    </div>
+
+    <header class="topbar">
+      <div class="brand">♥ <span>Egg Timer &lt;3</span></div>
+      <div class="top-actions">
+        <button id="themeBtn" class="icon-btn" title="Change theme">🌅</button>
+        <button id="breathBtn" class="icon-btn" title="Breathing exercise">🌬️</button>
+        <div class="zoom-controls" role="group" aria-label="Screen zoom controls">
+          <button id="zoomOutBtn" class="icon-btn zoom-btn" title="Zoom out — make everything smaller">−</button>
+          <span id="zoomLevel" class="zoom-level" title="Current zoom level">100%</span>
+          <button id="zoomInBtn" class="icon-btn zoom-btn" title="Zoom in — make everything bigger">+</button>
+          <button id="zoomResetBtn" class="icon-btn zoom-btn" title="Default zoom (100%)">⟳</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+
+      <!-- LEFT: Second-template welcome section -->
+      <section class="hero">
+
+        <div class="welcome-badge">♥ &nbsp; Welcome!</div>
+
+        <h1>
+          Let's make today<br>
+          <span>productive</span> <b>✦</b>
+        </h1>
+
+        <p class="hero-description">
+          A cozy little timer to help you focus,<br>
+          take breaks and get things done.
+        </p>
+
+        <div class="hero-buttons">
+          <button id="beginBtn" class="primary-btn">▶ &nbsp; Let's Begin</button>
+          <button id="exploreBtn" class="secondary-btn">Explore Features</button>
+        </div>
+
+        <p class="hero-tagline">♥ &nbsp; Built for focus, made with love.</p>
+
+        <div class="stats-row">
+          <div>
+            <strong id="sessionsCount">0</strong>
+            <span>Sessions</span>
+          </div>
+          <div>
+            <strong id="focusMinutes">0</strong>
+            <span>Focus Min</span>
+          </div>
+          <div>
+            <strong id="currentStreak">0</strong>
+            <span>Streak</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- RIGHT: Second-template timer window -->
+      <section id="timerWindow" class="timer-window">
+
+        <div class="timer-titlebar">
+          <span class="title-egg">🥚</span>
+          <span>Egg Timer &lt;3</span>
+          <div class="window-controls">
+            <button id="minimizeBtn" class="win-btn" title="Minimize window" aria-label="Minimize window">−</button>
+            <button id="maximizeBtn" class="win-btn" title="Maximize window" aria-label="Maximize window">□</button>
+            <span class="win-btn-deco" aria-hidden="true">×</span>
+          </div>
+        </div>
+
+        <div class="timer-body">
+
+          <h2 id="timerStatus">Your egg is ready!</h2>
+
+          <div class="egg-area">
+            <div class="egg-sparkles" id="eggSparkles"></div>
+
+            <div id="egg" class="egg">
+              <div id="eggCrack1" class="egg-crack crack-one"></div>
+              <div id="eggCrack2" class="egg-crack crack-two"></div>
+              <div id="eggCrack3" class="egg-crack crack-three"></div>
+              <div id="chick" class="chick">🐣</div>
+            </div>
+
+            <div class="egg-shadow"></div>
+          </div>
+
+          <div class="timer-info">
+          <div id="timerDisplay" class="timer-display">25:00</div>
+          <div id="completionMessage" class="completion-message"></div>
+
+          <div class="timer-buttons">
+            <button id="startBtn" class="start-btn" title="Start"><span class="btn-ico">▶</span>Start</button>
+            <button id="pauseBtn" class="pause-btn" title="Pause"><span class="btn-ico">||</span>Pause</button>
+            <button id="resetBtn" class="reset-btn" title="Reset"><span class="btn-ico">↻</span>Reset</button>
+          </div>
+          </div>
+
+        </div>
+
+        <!-- DOG: Exact requested path -->
+        <div class="dog-area">
+          <div id="dogSpeech" class="dog-speech">Ready when you are ♥</div>
+
+                    <img
+            id="dog"
+            class="dog-image"
+            src="assets/image/Dog.png"
+            alt="Cute dog"
+          >
+
+          <div id="dogHearts" class="dog-hearts"></div>
+        </div>
+
+        <!-- Resize grips: expand / shrink the square timer box (stays 1:1) -->
+        <div class="resize-handle resize-e" data-resize="e" title="Drag to resize — edge"></div>
+        <div class="resize-handle resize-s" data-resize="s" title="Drag to resize — edge"></div>
+        <div class="resize-handle resize-se" data-resize="se" title="Drag to resize — keeps the box square"></div>
+
+      </section>
+
+    </main>
+
+    <!-- Four feature cards from second template -->
+    <section class="features">
+
+      <div class="feature-card">
+        <div class="feature-icon">🥚</div>
+        <h3>Focus Timer</h3>
+        <p>Pomodoro timer to help you<br>stay in the zone.</p>
+        <span>• • •</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h3>Custom Sessions</h3>
+        <p>Choose your own work and<br>break times.</p>
+        <span>• • •</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Track Progress</h3>
+        <p>Monitor your daily focus<br>sessions.</p>
+        <span>• • •</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">💗</div>
+        <h3>Stay Motivated</h3>
+        <p>Enjoy inspiring quotes<br>every day.</p>
+        <span>• • •</span>
+      </div>
+
+    </section>
+
+    <footer class="footer">
+      <span>✦ Version 1.0.0</span>
+      <span id="footerCenter">Take a deep breath. You've got this! ♥</span>
+      <span>♫ <b id="ambienceName">Sunset Ambience</b></span>
+    </footer>
+
+  </div>
+
+  <!-- Theme modal -->
+  <div id="themeModal" class="modal">
+    <div class="modal-box">
+      <button id="closeThemeModal" class="modal-close">×</button>
+      <h2>Choose your ambience</h2>
+
+      <button class="theme-option" data-theme="sunset">🌅 Sunset</button>
+      <button class="theme-option" data-theme="night">🌙 Night</button>
+      <button class="theme-option" data-theme="ocean">🌊 Ocean</button>
+      <button class="theme-option" data-theme="forest">🌲 Forest</button>
+      <button class="theme-option" data-theme="fireplace">🔥 Fireplace</button>
+    </div>
+  </div>
+
+  <!-- Breathing modal -->
+  <div id="breathModal" class="modal">
+    <div class="modal-box breath-box">
+      <button id="closeBreath" class="modal-close">×</button>
+      <h2>Take a deep breath</h2>
+      <div id="breathCircle" class="breath-circle">
+        <span id="breathText">Breathe in...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Welcome modal with teddy -->
+  <div id="welcomeModal" class="modal">
+    <div class="modal-box welcome-box">
+            <div id="welcomeTeddyContainer" class="teddy-container happy">
+        <img
+          id="welcomeTeddyImage"
+          class="teddy-image"
+          src="assets/image/teddy.png"
+          alt="Happy teddy companion"
+        >
+      </div>
+
+      <h2 id="welcomeMessage">Welcome! ♥</h2>
+      <p id="welcomeSubmessage">Ready to make today productive?</p>
+
+      <div class="welcome-buttons">
+        <button id="welcomeClose" class="primary-btn">Let's Go!</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Teddy close-confirmation modal -->
+  <div id="teddyModal" class="modal no-backdrop">
+    <div class="modal-box teddy-box">
+            <div id="teddyContainer" class="teddy-container sad">
+        <img
+          id="teddyImage"
+          class="teddy-image"
+          src="assets/image/teddy.png"
+          alt="Crying teddy companion"
+        >
+      </div>
+
+      <h2 id="teddyMessage">Aww... stay a little longer? 🥺</h2>
+      <p id="teddySubmessage">Your focus session is still running.</p>
+
+      <div class="teddy-buttons">
+        <button id="teddyStay" class="primary-btn">Stay 💗</button>
+        <button id="teddyBye" class="secondary-btn">Leave 💔</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="confetti" class="confetti"></div>
+  <div id="sparkles" class="sparkles"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
